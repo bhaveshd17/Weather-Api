@@ -16,7 +16,7 @@ export class ApiService {
 
   async findAll(): Promise<any[]> {
     try {
-      const cities = await this.cityModel.find();
+      const cities = await this.cityModel.findMany();
       const data = await Promise.all(
         cities.map(async (city) => {   
           try {
@@ -32,7 +32,7 @@ export class ApiService {
               Main: response.data.main,
               Wind: response.data.wind,
               Clouds: response.data.clouds,
-              Visibility: response.data.visibility,
+              Visibility: response.data.visibily,
             };
           } catch (error) {
             return {
