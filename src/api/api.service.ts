@@ -14,35 +14,33 @@ export class ApiService {
     private readonly httpService: HttpService
   ) {}
 
-  async findAll(): Promise<any[]> {
+  async find(): Promise<any[]> {
     try {
-      const cities = await this.cityModel.findMany();
-      const data = await Promise.all(
-        cities.map(async (city) => {   
+      const cities = await this.cityModel.find();
+      const data = cities.map(async (city) => {   
           try {
-            const response = await this.httpService
+            const response = this.httpService
               .get(
                 `https://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=${process.env.WEATHER_API_KEY}`,
-              )
-              .toPromise();
-            return {
-              City: response.data.name,
-              Country: response.data.sys.country,
-              Weather: response.data.weather[0].main,
-              Main: response.data.main,
-              Wind: response.data.wind,
-              Clouds: response.data.clouds,
-              Visibility: response.data.visibily,
-            };
+              );
+              if(response){
+                return {
+                  City: response.data.name,
+                  Country: response.data.sys.country,
+                  Weather: response.data.weather[0].main,
+                  Main: response.data.main,
+                  Wind: response.data.wind,
+                  Clouds: response.data.clouds,
+                  Visibility: response.data.visibily,
+                };
+              }
           } catch (error) {
             return {
               City: city.name,
               Error: 'Weather data not available',
             };
           }
-        }),
-      );
-
+        });
       return data;
     } catch (error) {
       console.error('Error fetching cities:', error.message);

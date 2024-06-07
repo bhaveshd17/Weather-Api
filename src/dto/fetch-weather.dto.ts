@@ -10,9 +10,9 @@ export class FetchWeatherDto {
 
   @ApiProperty({
     description: 'Country Code',
-    example: "IND",
+    example: {"IND": "IND"},
   })
-  Country: String;
+  Country: Object;
 
   @ApiProperty({
     description: 'Weather',
