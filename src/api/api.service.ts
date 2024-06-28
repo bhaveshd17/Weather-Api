@@ -25,7 +25,7 @@ export class ApiService {
                 `https://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=${process.env.WEATHER_API_KEY}`,
               )
               .toPromise();
-            return {
+            cons result = {
               City: response.data.name,
               Country: response.data.sys.country,
               Weather: response.data.weather[0].main,
@@ -33,7 +33,8 @@ export class ApiService {
               Wind: response.data.wind,
               Clouds: response.data.clouds,
               Visibility: response.data.visibility,
-            };
+            }
+            return result;
           } catch (error) {
             return {
               City: city.name,
