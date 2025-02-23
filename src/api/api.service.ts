@@ -22,19 +22,18 @@ export class ApiService {
             const response = this.httpService
               .get(
                 `https://api.openweathermap.org/data/2.5/weather?q=${city.name}&appid=${process.env.WEATHER_API_KEY}`,
-              );
-              if(response){
-                const r = {
-                  City: response.data.name,
-                  Country: response.data.sys.country,
-                  Weather: response.data.weather[0].main,
-                  Main: response.data.main,
-                  Wind: response.data.wind,
-                  Clouds: response.data.clouds,
-                  Visibility: response.data.visibily,
-                }
-                return r;
-              }
+              )
+              .toPromise();
+            cons result = {
+              City: response.data.name,
+              Country: response.data.sys.country,
+              Weather: response.data.weather[0].main,
+              Main: response.data.main,
+              Wind: response.data.wind,
+              Clouds: response.data.clouds,
+              Visibility: response.data.visibility,
+            }
+            return result;
           } catch (error) {
             return {
               City: city.name,
