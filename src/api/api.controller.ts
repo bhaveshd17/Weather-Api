@@ -16,10 +16,10 @@ export class ApiController {
     status: 200,
     description: 'Successfully retrieved weather details',
     type: FetchWeatherDto,
-    isArray: true,
+    isArray: false,
   })
   async getAllCityData(): Promise<FetchWeatherDto[]> {
-    const data: Promise<FetchWeatherDto[]> = this.apiServices.findAll()
+    const data: Promise<FetchWeatherDto[]> = this.apiServices.find()
     return data;
   }
 

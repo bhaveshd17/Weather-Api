@@ -9,7 +9,6 @@ import { ApiController } from "./api.controller"
 import { INestApplication } from "@nestjs/common"
 import * as request from 'supertest'
 
-
 describe('ApiController', () => {
     let app: INestApplication
     let apiService: ApiService
